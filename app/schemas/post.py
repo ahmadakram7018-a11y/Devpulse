@@ -1,28 +1,27 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
 from datetime import datetime
-
 from app.schemas.user import UserResponse
+from typing import Optional
 
-class PostCreate(BaseModel):
+class CreatePost(BaseModel):
     title: str
     content: str
     is_published: bool = True
+    created_at: datetime = datetime.now()
 
-class PostUpdate(BaseModel):
-    title: Optional[str]
-    content: Optional[str]
-    is_published: Optional[bool]
 
 class PostResponse(BaseModel):
-    id: int
+    id : int
     title: str
     content: str
     is_published: bool
-    created_at: datetime
+    created_at: datetime    
     owner_id: int
-    owner : UserResponse
+    owner: "UserResponse" # this is a forward reference, because the UserResponse class is defined after the PostResponse class. So we need to use a string to refer to it.
 
-    class Config:
-        from_attributes = True
+class UpdatePost(BaseModel):
+    title: Optional[str] = None
+    content: Optional[str] = None
+    is_published: Optional[bool] = None
 
+    

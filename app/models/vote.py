@@ -1,11 +1,9 @@
 from sqlalchemy import Column, Integer, ForeignKey
-from app.database import Base # we use Base from our database module to define our models(tables)
+from sqlalchemy.orm import relationship
+from app.database import base
 
-
-class Vote(Base):
+class Vote(base):
     __tablename__ = "votes"
 
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
     post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), primary_key=True)
-
-    
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
