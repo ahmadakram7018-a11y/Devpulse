@@ -1,3 +1,3 @@
-from app.schemas.user import UserCreate, UserResponse
-from app.schemas.post import PostCreate, PostUpdate, PostResponse
-from app.schemas.vote import VoteCreate
+from app.schemas.user import CreateUser, UserResponse
+from app.schemas.post import CreatePost, UpdatePost, PostResponse
+from app.schemas.vote import CreateVote 

@@ -7,7 +7,7 @@ class CreatePost(BaseModel):
     title: str
     content: str
     is_published: bool = True
-    created_at: datetime = datetime.now()
+    
 
 
 class PostResponse(BaseModel):
@@ -15,7 +15,7 @@ class PostResponse(BaseModel):
     title: str
     content: str
     is_published: bool
-    created_at: datetime    
+    created_at: datetime = datetime.now()    
     owner_id: int
     owner: "UserResponse" # this is a forward reference, because the UserResponse class is defined after the PostResponse class. So we need to use a string to refer to it.
 

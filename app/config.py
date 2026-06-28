@@ -1,9 +1,12 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     Database_URL: str
     SECRET_KEY : str
     Debug: bool=True
 
-    class config:
+    class Config:
         env_file = ".env"
+
+
+settings = Settings()
