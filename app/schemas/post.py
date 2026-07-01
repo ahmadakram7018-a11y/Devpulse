@@ -7,8 +7,6 @@ class CreatePost(BaseModel):
     title: str
     content: str
     is_published: bool = True
-    
-
 
 class PostResponse(BaseModel):
     id : int
@@ -24,4 +22,3 @@ class UpdatePost(BaseModel):
     content: Optional[str] = None
     is_published: Optional[bool] = None
 
-    
