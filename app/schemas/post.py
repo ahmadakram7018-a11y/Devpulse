@@ -18,7 +18,7 @@ class PostResponse(BaseModel):
     owner: "UserResponse" # this is a forward reference, because the UserResponse class is defined after the PostResponse class. So we need to use a string to refer to it.
 
 class UpdatePost(BaseModel):
-    title: Optional[str] = None
-    content: Optional[str] = None
-    is_published: Optional[bool] = None
+    title: Optional[str] 
+    content: Optional[str] 
+    is_published: Optional[bool]
 
