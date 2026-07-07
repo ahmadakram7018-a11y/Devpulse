@@ -1,7 +1,10 @@
+from pydantic import BaseModel
 from sqlalchemy import Column, Integer, Boolean, Text, DateTime, ForeignKey, String
 from sqlalchemy.orm import relationship
 from app.database import Base
 from sqlalchemy.sql import func
+
+from app.schemas.post import PostResponse
 
 class Post(Base):
     __tablename__ = "posts"
@@ -15,3 +18,4 @@ class Post(Base):
 
     owner = relationship("User", back_populates="posts")
     
+

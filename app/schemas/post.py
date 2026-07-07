@@ -1,3 +1,4 @@
+from fastapi.background import P
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from app.schemas.user import UserResponse
@@ -22,3 +23,9 @@ class UpdatePost(BaseModel):
     content: Optional[str] 
     is_published: Optional[bool]
 
+class PostOut(BaseModel):
+    Post : PostResponse
+    votes : int    
+
+    class Config :
+        from_attributes = True
