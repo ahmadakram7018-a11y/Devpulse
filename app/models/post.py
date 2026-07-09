@@ -9,7 +9,7 @@ from app.schemas.post import PostResponse
 class Post(Base):
     __tablename__ = "posts"
 
-    id = Column(Integer,primary_key=True, index=True, nullable=False)
+    id = Column(Integer,primary_key=True, nullable=False)
     title = Column(String, nullable=False)
     content = Column(Text, nullable=False)
     is_published = Column(Boolean, default=True)

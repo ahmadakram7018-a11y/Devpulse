@@ -3,7 +3,6 @@ from app.database import engine, Base
 from app import models
 from app.routers import posts, users , auth, votes
 
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="DevPulse API", version="1.0.0")
 

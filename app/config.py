@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    Database_URL: str
+    DATABASE_URL: str
     SECRET_KEY : str
     Debug: bool=True
     ALGORITHM: str = "HS256"
