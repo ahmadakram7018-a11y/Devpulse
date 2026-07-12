@@ -115,3 +115,6 @@ def delete_post(
     post_query.delete(synchronize_session=False)
     db.commit()
     
+
+
+    
