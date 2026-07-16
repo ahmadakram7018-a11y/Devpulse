@@ -4,14 +4,19 @@ from app.utils.security import verify_access_token
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.models.user import User
+from app.utils.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+
 
 def get_current_user(token : str = Depends(oauth2_scheme), db : Session = Depends(get_db))->User:  # oauth2_scheme is a dependency that extracts the token from the request header 
     
     payload = verify_access_token(token)
     
     if payload is None:
+        logger.warning("Invalid or expired token attempt")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail = "Invalid credentials"
@@ -21,6 +26,7 @@ def get_current_user(token : str = Depends(oauth2_scheme), db : Session = Depend
     user = db.query(User).filter(User.id==user_id).first()
 
     if not user:
+        logger.warning("Invalid or expired token attempt")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail = "User not found"

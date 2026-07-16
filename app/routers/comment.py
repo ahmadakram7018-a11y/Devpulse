@@ -7,6 +7,9 @@ from app.models.comment import Comment
 from app.models.user import User
 from app.schemas.comments import CommentCreate, CommentUpdate, CommentResponse
 from app.utils.oauth2 import get_current_user
+from app.utils.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 router = APIRouter(tags=["Comments"])
 
@@ -46,6 +49,7 @@ def create_comment(
     db.add(new_comment)
     db.commit()
     db.refresh(new_comment)
+    logger.info(f"User {current_user.id} commented on post {post_id}")
     return new_comment
 
 # PROTECTED — update your own comment
@@ -98,6 +102,7 @@ def delete_comment(
         )
     comment_query.delete(synchronize_session=False)
     db.commit()
+    logger.info(f"Comment {comment_id} deleted by user {current_user.id}")
 
 
 

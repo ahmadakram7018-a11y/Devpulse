@@ -7,12 +7,15 @@ from app.schemas.vote import CreateVote
 from app.models.vote import Vote
 from app.models.user import User
 from app.utils.oauth2 import get_current_user
+from app.utils.logger import setup_logger
 
+logger = setup_logger(__name__)
 
 router = APIRouter(
     prefix="/vote",
     tags=["Vote"]
 )
+
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def vote(vote: CreateVote, db : Session = Depends(get_db), current_user: User = Depends(get_current_user)):
@@ -29,6 +32,7 @@ def vote(vote: CreateVote, db : Session = Depends(get_db), current_user: User = 
         
         db.add(new_vote)
         db.commit()
+        logger.info(f"User {current_user.id} voted on post {vote.post_id}")
         return {"message": "Successfully added vote"}
     
     if vote.direction == 0:
@@ -37,7 +41,9 @@ def vote(vote: CreateVote, db : Session = Depends(get_db), current_user: User = 
                 detail="Vote does not exist")
         db.delete(existing_vote)
         db.commit()
+        logger.info(f"User {current_user.id} removed vote from post {vote.post_id}")
         return {"message": "Vote removed succesfully"}
+        
     
     
 
