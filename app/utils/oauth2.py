@@ -28,7 +28,7 @@ def get_current_user(token : str = Depends(oauth2_scheme), db : Session = Depend
     if not user:
         logger.warning("Invalid or expired token attempt")
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail = "User not found"
         )
     

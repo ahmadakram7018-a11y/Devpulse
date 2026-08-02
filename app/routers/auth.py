@@ -22,7 +22,7 @@ def login(credential : OAuth2PasswordRequestForm = Depends(), db : Session = Dep
     if not user:
         logger.warning(f"Login attempt with non-existent email: {credential.username}")
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail = "invalid credentials"
         )
     

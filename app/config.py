@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     Debug: bool=True
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    TEST_DATABASE_URL : str
 
     class Config:
         env_file = ".env"
