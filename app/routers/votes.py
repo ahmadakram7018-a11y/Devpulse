@@ -12,7 +12,7 @@ from app.utils.logger import setup_logger
 logger = setup_logger(__name__)
 
 router = APIRouter(
-    prefix="/vote",
+    prefix="/votes",
     tags=["Vote"]
 )
 
@@ -22,6 +22,8 @@ def vote(vote: CreateVote, db : Session = Depends(get_db), current_user: User = 
     post = db.query(Post).filter(Post.id == vote.post_id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id {vote.post_id} does not exist")
+    if not current_user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not authenticated")
     
     existing_vote = db.query(Vote).filter(Vote.post_id == vote.post_id, Vote.user_id == current_user.id).first()
 

@@ -2,7 +2,6 @@
 from fastapi.testclient import TestClient
 import pytest
 
-from tests.conftest import clean_database
 
 def test_register_user(client):
     """New user can register successfully"""
