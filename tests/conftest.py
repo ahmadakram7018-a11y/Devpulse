@@ -112,3 +112,9 @@ def user2_authorized_client(db, client, test_user2):
         c.headers = {**c.headers, "Authorization": f"Bearer {token}"}
         yield c
     app.dependency_overrides.clear()
+
+
+
+
+
+    
